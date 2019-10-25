@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="este" enctype="multipart/form-data" style="background: burlywood; text-align: center">
+            <p:growl showDetail="true"></p:growl>
+            
+            <p:panelGrid columns="9" style="margin: 0 auto">
+                <p:row>
+                    <h2>Autor</h2>
+                    <p:panelGrid columns="3">
+                    <p:column  headerText="Nombre">
+                      NOMBRE
+                     <p:inputText value="#{vistaController.autor.nombre}"></p:inputText>
+                     </p:column>
+                    <p:column headerText="Fecha">
+                      FECHA
+                    <p:calendar value="#{vistaController.autor.fecha}"></p:calendar>
+                     </p:column>
+                    <p:column headerText="Crear">
+                        CREAR
+                         <p:selectOneMenu id="libros" value="#{vistaController.lista}" style="width:225px; vertical-align: bottom">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems var="lib" value="#{vistaController.libro()}" itemLabel="#{lib.nombre}" itemValue="#{lib.id_libro}"/>
+                         </p:selectOneMenu>
+                        </p:column>
+                        </p:panelGrid>
+                </p:row>
+                
+                <p:row>
+            <h2>Libro</h2>
+            <p:panelGrid columns="2">
+            <p:column>
+            NOMBRE
+            <p:inputText value="#{vistaController.libro.nombre}"></p:inputText>
+            </p:column>
+            <p:column>
+            EDITORIAL
+            <p:inputText value="#{vistaController.libro.editorial}"></p:inputText>
+            </p:column>
+                </p:panelGrid>
+                </p:row>
+            
+            <p:row>
+            <h2>DatosLibro</h2>
+            <p:panelGrid columns="4">
+            <p:column>
+            CIUDAD
+            <p:inputText value="#{vistaController.autorLibro.ciudad}"></p:inputText>
+             </p:column>
+            <p:column>
+            FECHA
+            <p:calendar value="#{vistaController.autorLibro.fecha}"></p:calendar>
+            </p:column>
+            </p:panelGrid>
+            </p:row>
+            
+            </p:panelGrid>
+            <p:commandButton value="Agregar" actionListener="#{vistaController.crear(vistaController.autor, vistaController.libro, vistaController.autorLibro)}" update="libros"></p:commandButton>
+            
+        </h:form>
+    </h:body>
+</html>
+
