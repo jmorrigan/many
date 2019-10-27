@@ -26,6 +26,11 @@
             <version>5.0</version>
         </dependency>
         <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>2.3.0</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>proyecto2-ejb</artifactId>
             <version>${project.version}</version>

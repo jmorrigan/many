@@ -9,8 +9,7 @@
     </h:head>
     <h:body>
         <h:form id="este" enctype="multipart/form-data" style="background: burlywood; text-align: center">
-            <p:growl showDetail="true"></p:growl>
-            
+           <p:messages autoUpdate="true" showDetail="true"></p:messages>
             <p:panelGrid columns="9" style="margin: 0 auto">
                 <p:row>
                     <h2>Autor</h2>
@@ -25,9 +24,9 @@
                      </p:column>
                     <p:column headerText="Crear">
                         CREAR
-                         <p:selectOneMenu id="libros" value="#{vistaController.lista}" style="width:225px; vertical-align: bottom">
-                        <f:selectItem itemLabel="Select One" itemValue="" />
-                        <f:selectItems var="lib" value="#{vistaController.libro()}" itemLabel="#{lib.nombre}" itemValue="#{lib.id_libro}"/>
+                         <p:selectOneMenu id="autor" value="#{vistaController.lista2}" style="width:200px; vertical-align: bottom">
+                             <f:selectItem itemLabel="AUTORES" noSelectionOption="true" />
+                             <f:selectItems var="aut" value="#{vistaController.autor()}" itemLabel="#{aut.nombre}" itemValue="#{aut.id_autor}"/>
                          </p:selectOneMenu>
                         </p:column>
                         </p:panelGrid>
@@ -35,7 +34,7 @@
                 
                 <p:row>
             <h2>Libro</h2>
-            <p:panelGrid columns="2">
+            <p:panelGrid columns="3">
             <p:column>
             NOMBRE
             <p:inputText value="#{vistaController.libro.nombre}"></p:inputText>
@@ -44,6 +43,13 @@
             EDITORIAL
             <p:inputText value="#{vistaController.libro.editorial}"></p:inputText>
             </p:column>
+                <p:column headerText="Crear">
+                        LIBROS
+                         <p:selectOneMenu id="libros" value="#{vistaController.lista}" style="width:200px; vertical-align: bottom">
+                             <f:selectItem itemLabel="LIBROS" noSelectionOption="true" />
+                             <f:selectItems var="lib" value="#{vistaController.libro()}" itemLabel="#{lib.nombre}" itemValue="#{lib.id_libro}"/>
+                         </p:selectOneMenu>
+                </p:column>
                 </p:panelGrid>
                 </p:row>
             
@@ -60,10 +66,36 @@
             </p:column>
             </p:panelGrid>
             </p:row>
-            
             </p:panelGrid>
-            <p:commandButton value="Agregar" actionListener="#{vistaController.crear(vistaController.autor, vistaController.libro, vistaController.autorLibro)}" update="libros"></p:commandButton>
+           <p:commandButton value="Agregar Todos" actionListener="#{vistaController.crear(vistaController.autor, vistaController.libro, vistaController.autorLibro)}" style="width: 190px" update="libros autor lista"></p:commandButton>
+            <p:commandButton value="Agregar AutorLibro" actionListener="#{vistaController.agregarAutorLibro(vistaController.autor, vistaController.autorLibro)}" style="width: 190px" update="libros autor lista"></p:commandButton>
+            <p:commandButton value="Cambiar Ciudad" actionListener="#{vistaController.editarAutorLibroDesdeLibro(vistaController.autorLibro)}" style="width: 190px" update="libros autor lista"></p:commandButton>
+            <p:commandButton value="Eliminar Autor" actionListener="#{vistaController.eliminarAutor()}" style="width: 190px" update="libros autor lista"></p:commandButton>
+            <p:commandButton value="Eliminar Libro" actionListener="#{vistaController.eliminarLibro()}" style="width: 190px" update="libros autor lista"></p:commandButton>
+            <p:commandButton value="Relacionar Existentes" actionListener="#{vistaController.relacionarAutorExistenteLibroExistente(vistaController.autorLibro)}" style="width: 190px" update="libros autor lista"></p:commandButton>
             
+            <br></br>
+            <p:separator>VISTA</p:separator>
+            <p:dataTable id="lista" var="l" value="#{vistaController.reporte}" paginator="true" rows="6" >
+                <p:column headerText="AUTOR">
+                    <p:outputLabel value="#{l.autor}"></p:outputLabel>
+                </p:column>
+                <p:column headerText="TERMINADO">
+                    <p:outputLabel value="#{l.terminado}"><f:convertDateTime pattern="MM/dd/yyyy" /></p:outputLabel>
+                </p:column>
+                <p:column headerText="LIBRO">
+                    <p:outputLabel value="#{l.libro}"></p:outputLabel>
+                </p:column>
+                <p:column headerText="EDITORIAL">
+                    <p:outputLabel value="#{l.editorial}"></p:outputLabel>
+                </p:column>
+                 <p:column headerText="CIUDAD">
+                     <p:outputLabel value="#{l.ciudad}"></p:outputLabel>
+                </p:column>
+                <p:column headerText="TERMINADO">
+                    <p:outputLabel value="#{l.terminado}"><f:convertDateTime pattern="MM/dd/yyyy" /></p:outputLabel>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </h:body>
 </html>
